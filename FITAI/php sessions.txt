@@ -1,0 +1,21 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+  session_start();
+  $username = $_SESSION['user'];
+  if($username == null AND $password ==null) {
+    echo "<script type='text/javascript'>window.location = 'index.php'</script>";
+  }
+?>
