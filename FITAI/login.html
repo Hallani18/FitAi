@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>Fit AI</title>
+		<link rel="stylesheet" href="style_for_login_and_website.css">
+	</head>
+
+	<body>
+		<dev class="container">
+			<video poster="background-pic.jpg" autoplay="true" loop="true">
+				<source src="background_video_with_audio.mp4" type="video/mp4">
+				<source src="background_video_with_audio.webm" type="video/webm">
+			</video>
+		</div>
+		<div class="login-page">
+			<div class="form">
+				<form class="register-form">
+					<img src="logo1.png">
+					<br>
+					<br>
+					<input type="text" placeholder="username"/>
+					<input type="text" placeholder="password"/>
+					<input type="text" placeholder="email"/>
+					<button>Create</button>
+					<p class="message">Already a Memeber?<a href="#">Login here</a>
+				</form>
+
+				<form>
+					<form class="Login-form">
+						<img src="logo2.png">
+						<br>
+						<br>
+						<input type="text" placeholder="username"/>
+						<input type="password" placeholder="password"/>
+						<button>login</button>
+						<p class="message">Register here.<a href="#">Register</a></p>
+				</form>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js">
+		</script>
+
+		<script type="text/javascript">
+			$('.message a').click(function(){
+			$('form').animate({height:"toggle",opacity: "toggle"}, "slow");
+			});
+		</script>
+			
+	</body>
+</html>

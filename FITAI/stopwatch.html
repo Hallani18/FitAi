@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="stopwatchstyle.css">
+  <link rel="stylesheet" href="style_for_login_and_website.css">
+</head>
+<body>
+
+            <ul class="main-nav">
+                <li><a href="website.html">HOME</a></li>
+                <li><a href="Recipes.html">RECIPES</a></li>
+                <li class="active"><a href="stopwatch.html">STOPWATCH/TIMER</a></li>
+                <li><a href="login.html">COMMUNITY</a></li>
+                <li><a href="login.html">ABOUT</a></li>
+            </ul>
+
+<center><h1>Stopwatch</h1></center>
+    
+<h2><time>00:00:00</time></h2>
+<button id="start">START</button>
+<button id="stop">STOP</button>
+<button id="clear">RESET</button>
+
+<script>
+    var h1 = document.getElementsByTagName('h2')[0],
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+    
+    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
+timer();
+/* Start button */
+start.onclick = timer;
+/* Stop button */
+stop.onclick = function() {
+    clearTimeout(t);
+}
+/* Clear button */
+clear.onclick = function() {
+    h1.textContent = "00:00:00";
+    seconds = 0; minutes = 0; hours = 0;
+}
+</script>
+</body>
+</html>
+
+<form>
+<h1>Minutes: <input type="text" id="mns" name="mns" value="0" size="3" maxlength="3" /> &nbsp; &nbsp; Seconds: <input type="text" id="scs" name="scs" value="0" size="2" maxlength="2" /><br/></h1>
+<input type="button" id="btnct" value="START" onclick="countdownTimer()"/>
+</form>
+<h2>Countdown Timer: &nbsp; <span id="showmns">00</span>:<span id="showscs">00</span></h2>
+<script type="text/javascript"><!--
+    /* Function to display a Countdown timer with starting time from a form */
+// sets variables for minutes and seconds
+var ctmnts = 0;
+var ctsecs = 0;
+var startchr = 0;       // used to control when to read data from form
+function countdownTimer() {
+  // https://coursesweb.net/javascript/
+  // if $startchr is 0, and form fields exists, gets data for minutes and seconds, and sets $startchr to 1
+  if(startchr == 0 && document.getElementById('mns') && document.getElementById('scs')) {
+    // makes sure the script uses integer numbers
+    ctmnts = parseInt(document.getElementById('mns').value) + 0;
+    ctsecs = parseInt(document.getElementById('scs').value) * 1;
+    // if data not a number, sets the value to 0
+    if(isNaN(ctmnts)) ctmnts = 0;
+    if(isNaN(ctsecs)) ctsecs = 0;
+    // rewrite data in form fields to be sure that the fields for minutes and seconds contain integer number
+    document.getElementById('mns').value = ctmnts;
+    document.getElementById('scs').value = ctsecs;
+    startchr = 1;
+    document.getElementById('btnct').setAttribute('disabled', 'disabled');     // disable the button
+  }
+  // if minutes and seconds are 0, sets $startchr to 0, and return false
+  if(ctmnts==0 && ctsecs==0) {
+    startchr = 0;
+    document.getElementById('btnct').removeAttribute('disabled');     // remove "disabled" to enable the button
+    return false;
+  }
+  else {
+    // decrease seconds, and decrease minutes if seconds reach to 0
+    ctsecs--;
+    if(ctsecs < 0) {
+      if(ctmnts > 0) {
+        ctsecs = 59;
+        ctmnts--;
+      }
+      else {
+        ctsecs = 0;
+        ctmnts = 0;
+      }
+    }
+  }
+  // display the time in page, and auto-calls this function after 1 seccond
+  document.getElementById('showmns').innerHTML = ctmnts;
+  document.getElementById('showscs').innerHTML = ctsecs;
+  setTimeout('countdownTimer()', 1000);
+}
+//-->
+</script>
